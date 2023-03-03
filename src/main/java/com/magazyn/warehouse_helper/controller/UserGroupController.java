@@ -1,5 +1,6 @@
 package com.magazyn.warehouse_helper.controller;
 
+import com.magazyn.warehouse_helper.model.Product;
 import com.magazyn.warehouse_helper.model.UserGroup;
 import com.magazyn.warehouse_helper.service.UserGroupService;
 import org.springframework.http.HttpStatus;
@@ -7,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/userGroup")
@@ -44,5 +46,12 @@ public class UserGroupController {
         return new ResponseEntity<String>("UserGroup is delete",HttpStatus.OK);
     }
 
+    // REST API allProductByUserId
+
+    @GetMapping ("{id}")
+    public Set<Product> allProductByUserId(@PathVariable("id") Long id){
+
+        return userGroupService.getAllProduct(id);
+    }
 
 }

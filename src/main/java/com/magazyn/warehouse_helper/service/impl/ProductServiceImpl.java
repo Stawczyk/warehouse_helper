@@ -1,4 +1,4 @@
-package com.example.EnglishShopMainApp.service.impl;
+package com.magazyn.warehouse_helper.service.impl;
 
 
 import com.magazyn.warehouse_helper.Exception.ResourceNotFoundException;
@@ -42,13 +42,11 @@ public class ProductServiceImpl implements ProductService {
         Product existingProduct =  productRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Product", "id", id));
         existingProduct.setNameProduct(product.getNameProduct());
         existingProduct.setSerialNumber(product.getSerialNumber());
-        existingProduct.setPriceNetto(product.getPriceNetto());
-        existingProduct.setPriceBrutto(product.getPriceBrutto());
-        existingProduct.setVat(product.getVat());
-        existingProduct.setQuantity(product.getQuantity());
+        existingProduct.setPriceNet(product.getPriceNet());
+        existingProduct.setPriceGross(product.getPriceGross());
         existingProduct.setAssumedQuantity(product.getAssumedQuantity());
         existingProduct.setExpirationDate(product.getExpirationDate());
-        existingProduct.setCategory(product.getCategory());
+        existingProduct.setCategoryProduct(product.getCategoryProduct());
         existingProduct.setProducer(product.getProducer());
         existingProduct.setPhoto(product.getPhoto());
         existingProduct.setNote(product.getNote());

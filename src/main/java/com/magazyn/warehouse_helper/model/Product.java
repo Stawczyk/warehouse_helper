@@ -8,27 +8,26 @@ import java.util.Arrays;
 @Entity
 @Table(name="Product")
 public class Product {
+
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id ;
-    @Column(name="name", nullable=false)
+    @Column(name="nameProduct", nullable=false)
     private String nameProduct;
     @Column(name="serialNumber", nullable=false)
     private String serialNumber;
-    @Column(name="priceNetto")
-    private Double priceNetto;
-    @Column(name="priceBrutto")
-    private Double priceBrutto;
-    @Column(name="vat")
-    private int vat;
-    @Column(name="quantity", nullable=false)
-    private int quantity;
+    @Column(name="priceNet")
+    private Double priceNet;
+    @Column(name="priceGross")
+    private Double priceGross;
     @Column(name="assumedQuantity")
     private int assumedQuantity;
     @Column(name="expirationDate")
     private String expirationDate;
-    @Column(name="category", nullable=false)
-    private String category;
+    @Column(name="CategoryProduct", nullable=false)
+    private CategoryProduct categoryProduct;
     @Column(name="producer")
     private String producer;
     @Lob
@@ -44,6 +43,13 @@ public class Product {
 
     public Product(){}
 
+    public CategoryProduct getCategoryProduct() {
+        return categoryProduct;
+    }
+
+    public void setCategoryProduct(CategoryProduct categoryProduct) {
+        this.categoryProduct = categoryProduct;
+    }
     public long getId() {
         return id;
     }
@@ -68,36 +74,20 @@ public class Product {
         this.serialNumber = serialNumber;
     }
 
-    public Double getPriceNetto() {
-        return priceNetto;
+    public Double getPriceNet() {
+        return priceNet;
     }
 
-    public void setPriceNetto(Double priceNetto) {
-        this.priceNetto = priceNetto;
+    public void setPriceNet(Double priceNet) {
+        this.priceNet = priceNet;
     }
 
-    public Double getPriceBrutto() {
-        return priceBrutto;
+    public Double getPriceGross() {
+        return priceGross;
     }
 
-    public void setPriceBrutto(Double priceBrutto) {
-        this.priceBrutto = priceBrutto;
-    }
-
-    public int getVat() {
-        return vat;
-    }
-
-    public void setVat(int vat) {
-        this.vat = vat;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setPriceGross(Double priceGross) {
+        this.priceGross = priceGross;
     }
 
     public int getAssumedQuantity() {
@@ -114,14 +104,6 @@ public class Product {
 
     public void setExpirationDate(String expirationDate) {
         this.expirationDate = expirationDate;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
     }
 
     public String getProducer() {
@@ -172,23 +154,20 @@ public class Product {
         this.emptyField3 = emptyField3;
     }
 
-    public Product(long id, String nameProduct, String serialNumber, Double priceNetto, Double priceBrutto, int vat, int quantity, int assumedQuantity, String expirationDate, String category, String producer, byte [] photo ,String note, String emptyField1, String emptyField2, String emptyField3) {
-        this.id = id;
+    public Product(String nameProduct, String serialNumber, Double priceNet, Double priceGross, int assumedQuantity, String expirationDate, String producer, CategoryProduct categoryProduct, byte[] photo, String note, String emptyField1, String emptyField2, String emptyField3) {
         this.nameProduct = nameProduct;
         this.serialNumber = serialNumber;
-        this.priceNetto = priceNetto;
-        this.priceBrutto = priceBrutto;
-        this.vat = vat;
-        this.quantity = quantity;
+        this.priceNet = priceNet;
+        this.priceGross = priceGross;
         this.assumedQuantity = assumedQuantity;
         this.expirationDate = expirationDate;
-        this.category = category;
         this.producer = producer;
         this.photo = photo;
         this.note = note;
         this.emptyField1 = emptyField1;
         this.emptyField2 = emptyField2;
         this.emptyField3 = emptyField3;
+        this.categoryProduct= categoryProduct;
     }
 
     @Override
@@ -197,13 +176,11 @@ public class Product {
                 "id=" + id +
                 ", nameProduct='" + nameProduct + '\'' +
                 ", serialNumber='" + serialNumber + '\'' +
-                ", priceNetto=" + priceNetto +
-                ", priceBrutto=" + priceBrutto +
-                ", vat=" + vat +
-                ", quantity=" + quantity +
+                ", priceNet=" + priceNet +
+                ", priceGross=" + priceGross +
                 ", assumedQuantity=" + assumedQuantity +
                 ", expirationDate='" + expirationDate + '\'' +
-                ", category='" + category + '\'' +
+                ", category='" + categoryProduct + '\'' +
                 ", producer='" + producer + '\'' +
                 ", photo=" + Arrays.toString(photo) +
                 ", note='" + note + '\'' +

@@ -1,6 +1,7 @@
 package com.magazyn.warehouse_helper.service;
 
 
+import com.magazyn.warehouse_helper.model.CategoryProduct;
 import com.magazyn.warehouse_helper.model.Product;
 
 import java.util.List;

@@ -25,7 +25,7 @@ public class ProductController {
         return new ResponseEntity<Product>(productService.saveProduct(product), HttpStatus.CREATED);
     }
     // REST API getallProduct
-
+    @GetMapping
     public List<Product> getAllProduct(){
         return productService.getAllProduct();
     }

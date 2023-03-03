@@ -2,8 +2,7 @@ package com.magazyn.warehouse_helper.model;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 @Entity
 @Table(name="UserGroup")
@@ -11,9 +10,11 @@ public class UserGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(name="name")
     private String name;
+    @Column(name="ProductsMaps")
 
-    List<Product>ProductsList;
+    Map<Product,Integer> productsMaps;
 
     public UserGroup(){}
 
@@ -33,18 +34,18 @@ public class UserGroup {
         this.name = name;
     }
 
-    public List<Product> getProductsList() {
-        return ProductsList;
+    public Map<Product,Integer> getProductsMaps() {
+        return productsMaps;
     }
 
-    public void setProductsList(List<Product> productsList) {
-        ProductsList = productsList;
+    public void setProductsMaps(Map<Product,Integer> productsMaps) {
+        this.productsMaps = productsMaps;
     }
 
-    public UserGroup(long id, String name, List<Product> productsList) {
+    public UserGroup(long id, String name, Map<Product, Integer> productsMaps) {
         this.id = id;
         this.name = name;
-        ProductsList = productsList;
+        this.productsMaps = productsMaps;
     }
 
     @Override
@@ -52,7 +53,7 @@ public class UserGroup {
         return "UserGroup{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", ProductsList=" + ProductsList +
+                ", ProductsList=" + productsMaps +
                 '}';
     }
 }
