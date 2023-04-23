@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 @Service
 
 public class UserGroupServiceImpl implements UserGroupService {
+    double sum;
 
     private TransactionsService transactionsService;
     private ProductRepository productRepository;
@@ -98,30 +99,35 @@ public class UserGroupServiceImpl implements UserGroupService {
 
     // tranzakcje SELL
     @Override
-    public void sellProducts(Long idUserGroup, Map<Product, Integer> thingsToBeBought, String nameBuyer,Long idUser,String note,double price) {
+    public void sellProducts(Long idUserGroup, Map<Product, Integer> thingsToBeSell, String nameBuyer,Long idUser,String note) {
 
       UserGroup existingUserGroup =  userGroupRepository.findById(idUserGroup).orElseThrow(()->new ResourceNotFoundException("User Group","id",idUserGroup));
 
         Map<Product, Integer> mapInMagazin = existingUserGroup.getProductsMaps();
-        for (Product productTooBought : thingsToBeBought.keySet()) {
+        for (Product productTooSell : thingsToBeSell.keySet()) {
             for (Product productInBase : mapInMagazin.keySet()) {
 
-                if (productInBase == productTooBought) {
-                    if (mapInMagazin.get(productInBase) - thingsToBeBought.get(productTooBought) < 0) {
+                if (productInBase == productTooSell) {
+                    if (mapInMagazin.get(productInBase) - thingsToBeSell.get(productTooSell) < 0) {
                         throw new RuntimeException("not");
                     } else {
-                        Integer x = mapInMagazin.get(productInBase) - thingsToBeBought.get(productTooBought);
+                        Integer x = mapInMagazin.get(productInBase) - thingsToBeSell.get(productTooSell);
                         mapInMagazin.put(productInBase, x);
-
+                        sum += productInBase.getPriceNet() * thingsToBeSell.get(productTooSell);
                     }
+
                 }
+
             }
 
         }
        existingUserGroup.setProductsMaps(mapInMagazin);
         userGroupRepository.save(existingUserGroup);
-        Transactions transactions = new Transactions(thingsToBeBought,nameBuyer,idUser,idUserGroup,note,price) ;
+        Transactions transactions = new Transactions(thingsToBeSell,nameBuyer,idUser,idUserGroup,note,sum) ;
         transactionsService.saveTransaction(transactions);
+
+        sum = 0;
+
     }
 
 

@@ -29,9 +29,9 @@ public class Transactions {
    @Column(name="note")
 
    private String note;
-   @Column(name="price")
+   @Column(name="sum")
 
-   private double price;
+   private double sum;
 
    @CreationTimestamp
    private LocalDateTime createTimeStamp;
@@ -89,11 +89,11 @@ public class Transactions {
    }
 
    public double getPrice() {
-      return price;
+      return sum;
    }
 
    public void setPrice(double price) {
-      this.price = price;
+      this.sum = price;
    }
 
    public LocalDateTime getCreateTimeStamp() {
@@ -112,13 +112,13 @@ public class Transactions {
       this.updateTimeStamp = updateTimeStamp;
    }
 
-   public Transactions(Map<Product, Integer> productsList, String nameBuyer, Long userId, Long userGroupId, String note, double price) {
+   public Transactions(Map<Product, Integer> productsList, String nameBuyer, Long userId, Long userGroupId, String note, double sum) {
       ProductsList = productsList;
       this.nameBuyer = nameBuyer;
       UserId = userId;
       idUserGroup = userGroupId;
       this.note = note;
-      this.price = price;
+      this.sum = sum;
    }
 
    @Override
@@ -130,7 +130,7 @@ public class Transactions {
               ", UserId=" + UserId +
               ", idUserGroup=" + idUserGroup +
               ", note='" + note + '\'' +
-              ", price=" + price +
+              ", price=" + sum +
               ", createTimeStamp=" + createTimeStamp +
               ", updateTimeStamp=" + updateTimeStamp +
               '}';

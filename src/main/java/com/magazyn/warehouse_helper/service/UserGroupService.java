@@ -26,6 +26,6 @@ public interface UserGroupService {
 
     List<Transactions> getAllTransactions (Long id);
 
-    void sellProducts (Long idUserGroup, Map<Product, Integer> thingsToBeBought, String nameBuyer,Long idUser,String note, double price );
+    void sellProducts (Long idUserGroup, Map<Product, Integer> thingsToBeSell, String nameBuyer,Long idUser,String note);
 
 }

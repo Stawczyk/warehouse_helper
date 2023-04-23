@@ -20,9 +20,10 @@ public class TransactionsServiceImpl implements TransactionsService {
         this.transactionsRepository = transactionsRepository;
     }
 
-    // zapis Transaction
     @Override
     public Transactions saveTransaction(Transactions transactions ) {
+
+
         return transactionsRepository.save(transactions);
     }
     // lista wszystkich  Transactions w całej apce

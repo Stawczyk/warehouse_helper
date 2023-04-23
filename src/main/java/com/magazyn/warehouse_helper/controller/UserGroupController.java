@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 @RestController
@@ -53,5 +54,17 @@ public class UserGroupController {
 
         return userGroupService.getAllProduct(id);
     }
+
+    // REST API sellTransaction
+    @PostMapping("{idUserGroup}|{nameBuyer}|{idUser}|{note}")
+    public ResponseEntity<String> sellTransaction(@PathVariable("id") long idUserGroup,
+                                                  @RequestBody  Map<Product, Integer> thingsToBeSell,
+                                                  @PathVariable("nameBuyer") String nameBuyer,
+                                                  @PathVariable ("idUser")Long idUser,
+                                                  @PathVariable ("note") String note){
+        userGroupService.sellProducts(idUserGroup,thingsToBeSell,nameBuyer,idUser,note);
+        return new ResponseEntity<String>("sellTransaction i redy to aprov ",HttpStatus.CREATED);
+    }
+
 
 }
